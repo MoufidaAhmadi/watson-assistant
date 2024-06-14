@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watson Assistant Integration</title>
+    <style>
+        #chat-container {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container"></div>
+
+    <p>یتیح لك <a href="https://www.gdcollect-data.fr/contact/" id="myLink">موقع الويب الخاص</a> التواصل معنا عبر البريد الإلكتروني أو عن طريق الهاتف عبر نموذج الاتصال الهاتفي</p>
+
+    <script>
+        // Fonction pour ouvrir le lien dans un nouvel onglet
+        function openInNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+
+        // Ajouter un gestionnaire d'événements de clic au lien
+        document.getElementById('myLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Empêcher le comportement par défaut du lien
+            var url = this.getAttribute('href'); // Obtenir l'URL du lien
+            openInNewTab(url); // Ouvrir le lien dans un nouvel onglet
+        });
+
+        // Insérer le script du widget de chat Watson Assistant ici
+        window.watsonAssistantChatOptions = {
+            integrationID: "5755d53f-2765-4cfa-8a48-0a341ecdcbf0", // Remplacez par votre integrationID
+            region: "eu-de", // Remplacez par votre région
+            serviceInstanceID: "bca54eee-9c10-4692-834d-38478498b13b", // Remplacez par votre serviceInstanceID
+            onLoad: function(instance) { instance.render(); }
+        };
+        setTimeout(function() {
+            const t = document.createElement('script');
+            t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/latest/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+        });
+    </script>
+</body>
+</html>
